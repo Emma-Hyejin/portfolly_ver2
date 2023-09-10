@@ -34,12 +34,14 @@ export const TitleSection = styled.div`
     flex
     items-center
     justify-between
-    my-5
+    mt-10
+    mb-5
   `}
   padding: 0 100px;
 
   h1 {
     font-size: 2rem;
+    font-weight: 300;
   }
 `;
 

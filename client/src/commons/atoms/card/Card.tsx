@@ -8,10 +8,11 @@ interface CardProps extends ComponentPropsWithoutRef<'div'> {
 }
 
 const CardContainer = styled.div`
-    ${tw`flex flex-col w-full h-full p-5 box-border rounded-2xl`}
+    ${tw` w-full p-5 box-border rounded-md mb-10`}
     background-color: white;
     box-sizing: inherit;
-    box-shadow: 0 10px 24px hsla(0,0%,0%,0.05), 0 20px 48px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.1);
+    // box-shadow: 0 10px 24px hsla(0,0%,0%,0.05), 0 20px 48px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.1);
+    border: 1px solid #eee;
 `;
 
 export default function Card({ children }: CardProps) {

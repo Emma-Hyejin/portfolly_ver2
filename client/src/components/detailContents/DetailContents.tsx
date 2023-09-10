@@ -20,10 +20,7 @@ export default function DetailContents({ data, handleDeleteModal, id, writerId, 
 
   return (
     <DetailCntContainer>
-      <h1>{data.title}</h1>
-      <hr />
       <p>{data.content}</p>
-      <hr />
       {writerId === viewerId ? (
         <EDBtnContainer>
           <PurpleBtn onClick={moveToEdit}>Edit</PurpleBtn>

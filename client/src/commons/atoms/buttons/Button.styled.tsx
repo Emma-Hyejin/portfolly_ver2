@@ -41,8 +41,9 @@ export const Edittype = styled(Purpletype)`
     bg-zinc-300
     w-20
     py-1
-    text-base
+    text-BASIC_PURPLE
     rounded-lg
+    h-full
   `}
 `;
 

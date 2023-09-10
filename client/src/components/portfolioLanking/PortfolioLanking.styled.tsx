@@ -2,13 +2,11 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 
 export const PortfolioLankingWrapper = styled.div`
-  
-  height: 400px;
-  background-color: rgb(255, 192, 203, 0.1);
-  h1 {
-    padding: 10px 100px;
-    font-size: 2.5rem;
-  }
+h1 {
+  padding: 10px 100px;
+  font-size: 2.5rem;
+  font-weight: 300;
+}
 `;
 
 export const ProlfolioLankingItemWrapper = styled.div`
@@ -16,7 +14,9 @@ export const ProlfolioLankingItemWrapper = styled.div`
   flex
   items-center
   justify-around
+  py-7
   `}
+  background-color: rgb(255, 192, 203, 0.1);
 `;
 
 export const PortfolioLankingItem = styled.div`

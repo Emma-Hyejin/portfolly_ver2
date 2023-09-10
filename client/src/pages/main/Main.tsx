@@ -86,10 +86,10 @@ export default function Main() {
 
   return (
     <>
-      <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
       <PortfolioLanking />
       <TitleSection>
         <h1>Portfolio</h1>
+        <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
         <Link to='/portfolio/edit'>
           <WriteButton>포트폴리오 등록</WriteButton>
         </Link>

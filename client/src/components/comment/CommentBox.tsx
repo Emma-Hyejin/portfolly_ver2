@@ -13,6 +13,7 @@ import CommentWriteBox from '@/commons/molecules/comment/CommentWriteBox';
 import { JbWrapper } from '@/pages/community-detail/CommunityDetail.styled';
 import noComment from '@/assets/noComment.png';
 import netaxios from '@/utils/axiosIntercept';
+import CommentList from './commentList';
 
 export default function CommentBox({ comments = [], handleRender }: any) {
   const [currentComment, setCurrentComment] = useState('');
@@ -79,15 +80,28 @@ export default function CommentBox({ comments = [], handleRender }: any) {
 
   if (amendComment.length <= 0) {
     return (
-      <Card>
-        <JbWrapper>
-          <FlexColumnContainer gap={0}>
-            <img src={noComment} alt="no comments" />
-          </FlexColumnContainer>
-          <CommentWriteBox saveComment={saveComment} handleComment={handleComment} isInput={currentComment} />
-        </JbWrapper>
-      </Card>
-    );
+      <>
+        <Card>
+          {/* <JbWrapper> */}
+            {/* <FlexColumnContainer gap={0}> */}
+              {/* <img src={noComment} alt="no comments" /> */}
+              {/* <div>dasasss</div> */}
+            {/* </FlexColumnContainer> */}
+            {/* <CommentWriteBox saveComment={saveComment} handleComment={handleComment} isInput={currentComment} /> */}
+          {/* </JbWrapper> */}
+          <CommentList />
+        </Card>
+        <Card>
+          <JbWrapper>
+            <FlexColumnContainer gap={0}>
+              {/* <img src={noComment} alt="no comments" /> */}
+              {/* <div>dasasss</div> */}
+            </FlexColumnContainer>
+            <CommentWriteBox saveComment={saveComment} handleComment={handleComment} isInput={currentComment} />
+          </JbWrapper>
+        </Card>
+      </>
+    );    
   }
 
   return (

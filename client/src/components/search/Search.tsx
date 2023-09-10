@@ -59,7 +59,7 @@ export default function Search({ setSearchValue, currentSearch, data, setSearchs
   return (
     <SearchContainer onSubmit={enterToSearch}>
       <SearchIcon />
-      <SearchBox type="text" onChange={handleChange} />
+      <SearchBox type="text" placeholder='포트폴리오 검색' onChange={handleChange} />
     </SearchContainer>
   );
 }
