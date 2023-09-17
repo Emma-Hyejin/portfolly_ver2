@@ -10,7 +10,7 @@ export const SearchContainer = tw.form`
   max-w-md
   min-w-min
   mx-auto
-  text-white
+  text-BASIC_TEXT
 `;
 
 export const SearchIcon = styled(BsSearchHeart)`
@@ -18,7 +18,7 @@ export const SearchIcon = styled(BsSearchHeart)`
     absolute
     ml-4 
     top-1/2
-    text-gray-300
+    text-BASIC_TEXT
     transform -translate-y-1/2
     transition-colors duration-300 ease-in-out
   `}
@@ -28,11 +28,12 @@ export const SearchBox = styled.input`
   ${tw`
     pl-12
     h-12
-    text-white
+    text-BASIC_TEXT
     w-full
-    rounded-full	
+    rounded-md
     bg-transparent
-    border-2 border-gray-500
+    border
+    border-neutral-400
   `}
 
   &:focus {

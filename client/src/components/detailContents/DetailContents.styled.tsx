@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 export const DetailCntContainer = styled.div`
   ${tw`
-    bg-white
     p-5
     shadow-md
     relative
   `}
 
-  height: 700px;
-  border-radius: 20px;
+  height: 500px;
+  border-radius: 10px;
+  background-color: rgb(231, 230, 251, 0.6);
 
   > h1 {
     font-size: 40px;

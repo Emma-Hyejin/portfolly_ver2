@@ -10,7 +10,7 @@ import DeleteModal from '@/components/modal/DeleteModal';
 
 import { CommuProps } from '@/types';
 
-import { CmDContainer, CommentContainer, MainContainer, PageWrapper } from './CommunityDetail.styled';
+import { CmDContainer, CommentContainer, TitleContainer, MainContainer, PageWrapper } from './CommunityDetail.styled';
 
 export default function CommunityDetail({ handleClick }: any) {
   const [memberData, setMemberData] = useState<CommuProps | null>(null);
@@ -66,14 +66,17 @@ export default function CommunityDetail({ handleClick }: any) {
 
   return (
     <PageWrapper>
-      <MemberProfile
-        type={'blackboard'}
-        member={{
-          id: memberData.memberId,
-          name: memberData.name,
-          imageUrl: 'https://picsum.photos/200/300',
-        }}
-      />
+      <TitleContainer>
+        <MemberProfile
+          type={'blackboard'}
+          member={{
+            id: memberData.memberId,
+            name: memberData.name,
+            imageUrl: 'https://picsum.photos/200/300',
+          }}
+        />
+        <h1>{memberData.title}</h1>
+      </TitleContainer>
       <MainContainer onClick={handleClick}>
         <CmDContainer>
           <DetailContents
@@ -84,10 +87,12 @@ export default function CommunityDetail({ handleClick }: any) {
             viewerId={viewerId}
           />
         </CmDContainer>
-        <CommentContainer>
-          <CommentBox comments={memberData.comments} handleRender={handleRender} />
-        </CommentContainer>
       </MainContainer>
+      <h2>Comments</h2>
+      <hr />
+      <CommentContainer>
+        <CommentBox comments={memberData.comments} handleRender={handleRender} />
+      </CommentContainer>
       {clickDeletePost ? <DeleteModal onConfirm={handleDeleteModal} onCancel={handleDeleteModal} /> : ''}
     </PageWrapper>
   );

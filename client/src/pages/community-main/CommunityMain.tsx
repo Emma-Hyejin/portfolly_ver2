@@ -2,73 +2,99 @@ import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import Search from '@/components/search/Search';
-// import { call } from '@/utils/apiService';
 import CommunityItem from '@/components/communityItem/CommunityItem';
-import WritingBtn from '@/commons/atoms/buttons/writing/writingBtn';
-import datano from '@/assets/datano.png';
+// import { call } from '@/utils/apiService';
 
 import { CommuProps } from '@/types';
 
 import {
-  ItemWrapper,
-  SearchContainer,
+  CommunityItemWrapper,
   CommunityWrapper,
-  ListsWrapper,
-  StyledWritingBtn,
-  NodataImage,
+  SearchContainer,
+  CommunityMainWrapper,
+  TitleSectionCommu,
+  DivisionTitle,
+  DivisionFilter,
+  DivisionBox,
+  DivisionWrapper,
+  RightSideWrapper,
+  SideBoxWrapper,
+  NoticeItems,
+  RankingTitle,
+  RankingCommuItem,
+  WritingButton,
 } from './CommunityMain.styled';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 export default function CommunityMain() {
-  const [data, setData] = useState<CommuProps[]>([]);
-  const [searchParams] = useSearchParams();
-  const division = searchParams.get('division');
-  const page = 1;
-  const size = 30;
+  // const [data, setData] = useState<CommuProps[]>([]);
+  // const [searchParams] = useSearchParams();
+  // const division = searchParams.get('division');
+  // const page = 1;
+  // const size = 30;
 
-  const state: any = useSelector((state) => state);
-  const currentLoginState = state.loginSlice.isLogin;
+  // const state: any = useSelector((state) => state);
+  // const currentLoginState = state.loginSlice.isLogin;
 
-  useEffect(() => {
-    const showWholeCommu = async () => {
-      await axios
-        .get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`)
-        .then((res) => {
-          console.log(res.data.data);
-          setData(res.data.data);
-        });
-    };
+  // useEffect(() => {
+  //   const showWholeCommu = async () => {
+  //     await axios
+  //       .get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`)
+  //       .then((res) => {
+  //         console.log(res.data.data);
+  //         setData(res.data.data);
+  //       });
+  //   };
 
-    showWholeCommu();
-  }, [division]);
+  //   showWholeCommu();
+  // }, [division]);
 
   
 
   // 검색 - 07.11 효정
-  const [currentSearch, setCurrentSearch] = useState('');
-  const [searchs, setSearchs] = useState([] as any);
+  // const [currentSearch, setCurrentSearch] = useState('');
+  // const [searchs, setSearchs] = useState([] as any);
 
-  useEffect(() => {
-    setSearchs(data);
-  }, [data]);
+  // useEffect(() => {
+  //   setSearchs(data);
+  // }, [data]);
 
   return (
     <CommunityWrapper>
-      <SearchContainer>
+    <CommunityMainWrapper>
+      {/* <SearchContainer>
         <Search
           setSearchValue={setCurrentSearch}
           currentSearch={currentSearch}
           data={data}
           setSearchs={setSearchs}
         />
-      </SearchContainer>
-        <ItemWrapper>
-          {currentLoginState ? (
+      </SearchContainer> */}
+      <TitleSectionCommu/>
+      <WritingButton>새글 등록하기</WritingButton>
+      
+        <DivisionWrapper>
+          <DivisionBox>
+            <DivisionTitle>Recruitment</DivisionTitle>
+            <DivisionTitle>Cooperation</DivisionTitle>
+          </DivisionBox>
+
+          <DivisionBox>
+            <DivisionFilter>최신순</DivisionFilter>
+            <DivisionFilter>인기순</DivisionFilter>
+          </DivisionBox>
+        </DivisionWrapper>
+
+        <CommunityItemWrapper>
+          {Array.from({length: 5},(_, index) => {
+            return <CommunityItem key={index}/>
+          }) }
+
+
+          {/* {currentLoginState ? (
             <Link to="/boards/edit">
-              <StyledWritingBtn>
-                <WritingBtn />
-              </StyledWritingBtn>
+                <WritingButton>새글 등록하기</WritingButton>
             </Link>
           ) : ''}
           {searchs.length > 0 ? (
@@ -79,8 +105,25 @@ export default function CommunityMain() {
             </ListsWrapper>
           ) : (
             <NodataImage src={datano} alt="no data" />
-          )}
-        </ItemWrapper>
+          )} */}
+
+
+        </CommunityItemWrapper>
+    </CommunityMainWrapper>
+
+    <RightSideWrapper>
+      <SideBoxWrapper>
+        <NoticeItems/>
+      </SideBoxWrapper>
+
+      <SideBoxWrapper type="ranking">
+        <RankingTitle title={"베스트 게시글"} date={"오후 6시"} />
+        {Array.from({length:5} ,(_, index)=> {
+          return <RankingCommuItem key={index} num={index+1} title={"프론트 구합니다. 삼성전자 앱 제작"} likes={122}/>
+        })}
+      </SideBoxWrapper>
+    </RightSideWrapper>
+
     </CommunityWrapper>
   );
 }

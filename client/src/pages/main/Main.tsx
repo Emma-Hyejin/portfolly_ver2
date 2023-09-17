@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { category } from '@/store/categorySlice';
-// import { call } from '@/utils/apiService';
 
 import CategoryNavBar from '@/components/navbar/CategoryNavBar';
 import WebItem from '@/components/webItem/WebItem';
-import { WebItemsContainer, NodataImage } from './Main.styled';
+import { WebItemsContainer, NodataImage, TitleSection, CategorySection, FilterWrapper, WriteButton } from './Main.styled';
 import AppItem from '@/components/appItem/AppItem';
 import GraphicItem from '@/components/graphicItem/GraphicItem';
 import PhotoItem from '@/components/photoItem/PhotoItem';
 import ThreeDItem from '@/components/threeDitem/ThreeDITem';
 import Search from '@/components/search/Search';
+import PortfolioLanking from '@/components/portfolioLanking/PortfolioLanking';
 import datano from '@/assets/datano.png';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const categoryMap = {
   web: 'web',
@@ -41,11 +42,6 @@ export default function Main() {
     window.scrollTo(0, 0);
     const fetchData = async () => {
       try {
-        // const res = await call(`/portfolios?category=${categoryParam}&page=1&size=5`, 'GET', null);
-        // console.log(res);
-        // setItems(res.data);
-        // setFilteredItems(res.data);
-
         await axios.get(`https://api.portfolly.site/portfolios?category=${categoryParam}&page=1&size=5`).then((res) => {
           console.log(res.data.data);
           setItems(res.data.data);
@@ -90,8 +86,22 @@ export default function Main() {
 
   return (
     <>
-      <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
-      <CategoryNavBar />
+      <PortfolioLanking />
+      <TitleSection>
+        <h1>Portfolio</h1>
+        <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
+        <Link to='/portfolio/edit'>
+          <WriteButton>포트폴리오 등록</WriteButton>
+        </Link>
+      </TitleSection>
+      <CategorySection>
+        <CategoryNavBar />
+        <FilterWrapper>
+          <li className='currentPick'>최신순</li>
+          <li>|</li>
+          <li>인기순</li>
+        </FilterWrapper>
+      </CategorySection>
       <WebItemsContainer>
         {searchs.length > 0 ? (
           searchs.map((searchedItem: any, index: any) => {

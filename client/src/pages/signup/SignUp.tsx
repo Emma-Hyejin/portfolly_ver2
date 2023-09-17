@@ -1,82 +1,90 @@
 import { useState } from 'react';
-import { BsArrowReturnLeft } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
 
-import {
-  ContentBox,
-  SignUpWrapper,
-  SingupSection,
-  HorizonLine,
-  InputWrapper,
-  InputForm,
-  SecreatTag,
-} from './SignUp.styled';
-import { BackButton } from '@/commons/atoms/buttons/Button.styled';
-import BackText from '@/commons/atoms/backText/BackText';
-import { ContentSection, TitleSection } from '../login/Login.styled';
-import LoginGoogleForm from '@/components/login/LoginGoogleForm';
+import { BottomRoundInput, MiddleRoundInput, TopRoundInput } from "@/components/Input/Input";
+import { ContentWrapper, DivisionInput, LogoV2Img, RoleWrapper, SelectDivision, SignupInputWrapper, SignupRoleWrapper, SignupWrapper, SubmitButton, SubmitWrapper, TitleText } from "./SignUp.styled";
+import {LiaLockSolid, LiaCalendarPlus, LiaUserCheckSolid, LiaUserSolid, LiaPhoneSolid } from "react-icons/lia";
+import LogoV2 from '@/assets/logoVer2.png';
 import AlertModal from '@/components/modal/AlertModal';
+import { MainTitle, MiddleTitle, PointMainTitle, WelcomeWrapper } from './Welcome.styled';
 
-export default function SignUp() {
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  const [icClick, setIsClick] = useState(false);
+export default function Signup () {
+    const [ alert, setAlert ] = useState(true);
+    const [ welcome, setWelcome ] = useState(false);
 
-  const infoModal = () => {
-    setIsClick(!icClick);
-  };
+    const handleAlert = () => {
+        setAlert(!alert);
+    }
 
-  return (
-    <SignUpWrapper>
-      <BackText>Portfolly</BackText>
+    const handleWelcome = () => {
+        setWelcome(!welcome);
+        
+    }
 
-      <Link to="/main">
-        <BackButton>
-          <BsArrowReturnLeft size={30} />
-        </BackButton>
-      </Link>
+    const handleTime = () => {
 
-      <SingupSection>
-        <TitleSection>Choose your account.</TitleSection>
-        <ContentSection>Experience the artistry and ingenuity of diverse portfolios, curated for web</ContentSection>
+    // setTimeout(handleWelcome, 3000 );
+    console.log(" 실행");
+    }
 
-        <InputWrapper>
-          <InputForm placeholder="write the guest name" value={'John'}></InputForm>
-          <InputForm placeholder="write the guest email" value={'john@example.com'}></InputForm>
-        </InputWrapper>
 
-        <LoginGoogleForm type={'guest'}>Guest Entrance</LoginGoogleForm>
-        <SecreatTag onClick={infoModal}>It you forgot the gueset info, click here</SecreatTag>
-        {icClick ? (
-          <AlertModal
-            onCancel={infoModal}
-            onConfirm={infoModal}
-            type={'etc'}
-            title={'게스트 로그인 정보'}
-            content={`NAME: John // Email: john@example.com`}
-            clicked={'닫기'}
-          ></AlertModal>
-        ) : null}
-      </SingupSection>
-      <HorizonLine />
-      <div className="flex-1">
-        <ContentBox>
-          <div className="text-xl">Portfolly와 함께 최고의 파트너를 만나보세요.</div>
-          <div>
-            저희 플랫폼은 창의적인 아티스트들과 프로젝트를 공유하고 싶은 열정적인 클라이언트를 연결하는 곳입니다.
-          </div>
-          <div>
-            우리의 목표는 효과적으로 커뮤니케이션하고, 인상적인 포트폴리오를 탐색하고, 마침내 꿈의 파트너를 찾는 것을
-            돕는 것입니다.
-          </div>
-          <div>
-            클라이언트로서, 당신은 다양한 아티스트의 작품을 즐길 수 있고, 자신의 프로젝트에 완벽한 파트너를 찾을 수
-            있습니다.
-          </div>
-          <div>아티스트로서, 당신은 전세계의 클라이언트들과 협력하여 놀라운 프로젝트를 실현시킬 수 있습니다.</div>
-          <div>함께 이 창의적인 여행을 시작해 보세요!</div>
-        </ContentBox>
-      </div>
-    </SignUpWrapper>
-  );
+    return(
+        <>
+        {welcome === true ? (
+
+                <WelcomeWrapper>
+                    <MiddleTitle>Welcome to Portfoly</MiddleTitle>
+                    <MainTitle>환영합니다.</MainTitle>
+                    <MainTitle>저희 <PointMainTitle>Portfolly</PointMainTitle> 와 함께 여행을 떠나세요. </MainTitle>
+                </WelcomeWrapper>
+
+
+        ): <SignupWrapper>
+            <LogoV2Img src={LogoV2}/>
+
+            <SignupInputWrapper>
+                <TopRoundInput icon={LiaUserSolid} type={"email"} placeholder={"아이디"}/>
+                <MiddleRoundInput icon={LiaLockSolid} type={"text"} placeholder={"비밀번호"}/>
+                <BottomRoundInput icon={LiaUserCheckSolid} />
+            </SignupInputWrapper>
+
+            <SignupRoleWrapper>
+                <RoleWrapper>
+                    <TitleText>프리랜서</TitleText>
+                    <ContentWrapper>
+                        작업물을 전시하고 마음이 맞는 동료를 찾고 계신가요<br/>
+                        저희 Portfolly 에서 만난 동료들과 함께 좋은 기회를 찾아 여행을 떠나세요!
+                    </ContentWrapper>
+                </RoleWrapper>
+                <RoleWrapper>
+                    <TitleText>기업 / 의뢰인</TitleText>
+                    <ContentWrapper>
+                        원하시는 스타일의 프리랜서 분들을 찾고 계신가요?<br/>
+                        저희 Portfolly 에서 좋은 프리랜서분들과 작업물을 관리하세요.
+                    </ContentWrapper>
+                </RoleWrapper>
+            </SignupRoleWrapper>
+
+            <SignupInputWrapper>
+                <TopRoundInput icon={LiaUserSolid} type={"text"} placeholder={"이름"}/>
+                <MiddleRoundInput icon={LiaCalendarPlus} type={"date"} placeholder={"생년월일"} />
+
+                    <SelectDivision>
+                        <DivisionInput onClick={handleAlert}>남자</DivisionInput><DivisionInput>여자</DivisionInput>
+                        { alert ? (
+                            <AlertModal type={"etc"} onCancel={handleAlert} title={"죄송합니다,"} content={"어쩌구 저쩌구 심려를 끼쳐 어쩌구 저쩌구 저쩌구 "} clicked={"닫기"}/>
+                        ) : null }
+                    </SelectDivision>
+                    <SelectDivision>
+                        <DivisionInput>내국인</DivisionInput><DivisionInput>외국인</DivisionInput>
+                    </SelectDivision>
+
+
+                <BottomRoundInput icon={LiaPhoneSolid} type={"tel"} placeholder={"휴대전화 번호"}/>
+            </SignupInputWrapper>
+
+            <SubmitWrapper><SubmitButton type="submit" value="회원가입" onClick={handleWelcome}/></SubmitWrapper>
+
+        </SignupWrapper> }</>
+        
+    )
 }

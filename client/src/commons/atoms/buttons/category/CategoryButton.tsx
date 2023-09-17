@@ -48,9 +48,14 @@ export interface CategoryBtnProps {
 
 // style3;
 const Category = styled.button`
-  ${tw`h-12 px-10 text-base font-semibold text-gray-400 uppercase tracking-wider border border-transparent rounded-md bg-transparent focus:outline-none transition-all duration-300 ease-in-out transform active:scale-95`}
-  &:hover, &:focus {
-    color: white;
+  ${tw`h-12 pr-20 text-xl font-semibold text-gray-400 uppercase tracking-wider border border-transparent rounded-md bg-transparent focus:outline-none transition-all duration-300 ease-in-out transform active:scale-95`}
+  &:focus {
+    ${tw`
+      text-BASIC_PURPLE
+      underline
+      underline-offset-4
+      decoration-BASIC_PURPLE
+    `}
   }
 `;
 

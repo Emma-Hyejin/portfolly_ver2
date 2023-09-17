@@ -15,7 +15,7 @@ interface MemberProfile {
 
 const ImageSizes: any = {
   board: 65,
-  comment: 35,
+  comment: 70,
   portfolio: 100,
   blackboard: 65,
 };
@@ -23,7 +23,8 @@ const ImageSizes: any = {
 const MemberProfile = ({ type, member, date }: MemberProfile) => {
   const itemPic = member.imageUrl === null ? circleNoImg : member.imageUrl;
   return (
-    <MemberProfileWrapper gap={15}>
+    <MemberProfileWrapper>
+      <h3>짱구님</h3>
       <Image src={itemPic} url={`/members/${member.id}`} shape="circle" size={ImageSizes[type]} />
       {type === 'portfolio' && <Label text={member.name} type={type} url={`/members/${member.id}`} />}
       {type !== 'portfolio' && (

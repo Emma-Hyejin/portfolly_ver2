@@ -36,18 +36,18 @@ export default function CommentWriteBox({ saveComment, handleComment, isInput }:
 
   return (
     <CommentContainer gap={5}>
-      <CommentWrapper gap={0}>
+      <CommentWrapper>
         <MemberProfile
           type="comment"
           member={{ id: Number(memberInfo), name: userName, imageUrl: 'https://picsum.photos/233' }}
         />
-        <SaveBtn onClick={saveComment} />
       </CommentWrapper>
       <CommentInput
         placeholder="write your comment"
         value={isInput}
         onChange={(e: any) => handleComment(e.target.value)}
       />
+      <SaveBtn onClick={saveComment} />
     </CommentContainer>
   );
 }

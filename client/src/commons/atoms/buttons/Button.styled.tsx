@@ -13,12 +13,12 @@ export const Button = tw.button`
 `;
 
 export const Purpletype = styled(Button)`
-  ${tw`bg-POINT_COLOR
+  ${tw`bg-BASIC_PURPLE
   w-fit
   whitespace-nowrap`}
 
   &:hover {
-    ${tw`bg-HOVER_COLOR`}
+    ${tw`bg-BASIC_HOVER`}
   }
 `;
 
@@ -41,8 +41,9 @@ export const Edittype = styled(Purpletype)`
     bg-zinc-300
     w-20
     py-1
-    text-base
+    text-BASIC_PURPLE
     rounded-lg
+    h-full
   `}
 `;
 

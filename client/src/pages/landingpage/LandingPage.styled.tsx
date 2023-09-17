@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 
-export const LandingPageWrapper = styled.div`
-  padding: 30px;
-  background-color: #000;
+export const HomeWrapper = styled.div`
 `;
 
-export const ScrollDownComent = styled.p`
-  color: #fff;
-  
+export const HomeContentsWrapper = styled.div`
+  padding: 0 100px 50px;
 `;

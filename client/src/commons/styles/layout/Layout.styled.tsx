@@ -21,7 +21,7 @@ const BackgroundImage = styled.div`
   ${tw`
     absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover
   `}
-  background-image: url(${defaultBgimg});
+  // background-image: url(${defaultBgimg});
   pointer-events: none;
 `;
 

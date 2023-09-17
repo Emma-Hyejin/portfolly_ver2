@@ -13,7 +13,7 @@ export const Center = tw.div`
 `;
 
 export const FlexContainer = tw(Container)`
-  items-center justify-center mt-10
+  items-center justify-center
 `;
 //categorypart 같음
 export const FlexColumnContainer = tw(Container)`
