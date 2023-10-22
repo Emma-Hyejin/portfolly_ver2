@@ -3,12 +3,14 @@ import { styled } from 'styled-components';
 
 export const QuillWrapper = styled.div<{ isTitleFormOpen: boolean }>`
   z-index: 10;
-  position: absolute;
+  position: relative;
   border: 0;
   top: 0;
+  height: 60vh;
+  margin-top: 50px;
   pointer-events: ${({ isTitleFormOpen }) => isTitleFormOpen && 'none'};
   .ql-toolbar {
-    padding: 17px 0;
+    padding: auto 0;
     background-color: #252525;
     border: 0;
     text-align: center;
@@ -23,7 +25,9 @@ export const QuillWrapper = styled.div<{ isTitleFormOpen: boolean }>`
     border: 0;
   }
   .ql-editor{
-    width: 1000px;
-    height: calc(100vh - 60px);
+    width: fit-content;
+    min-width: 850px;
+    max-height: calc(100vh - 30px);
   }
+  border: 1px solid gray;
 `

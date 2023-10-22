@@ -3,8 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import useChangeHtmlContent from '@/hooks/useChangeHtmlContent';
-import { call, changeDateFormat } from '@/utils';
+import { call } from '@/utils';
 import { Portfolio, Member, Tag } from '@/types';
+import Image from '@/commons/atoms/image/Image';
 
 import {
   ButtonHeader,
@@ -15,19 +16,25 @@ import {
   UserCard,
   UserContainer,
   AskCommisionBtn,
+  DetailContainer,
+  SmallRowContainer,
+  SmallPortfolioContainer,
 } from '@/pages/portfolio-detail/PortfolioDetail.styled';
-import { Center, FlexBetweenWrapper, FlexColumnContainer, FlexEndWrapper, FlexWrapper, } from '@/commons/styles/Containers.styled';
-import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/text/Typography';
-import MemberProfile from '@/commons/molecules/profile/MemberProfile';
+import { FlexBetweenWrapper, FlexEndWrapper, FlexWrapper, } from '@/commons/styles/Containers.styled';
+import { BodyText, HeadingText, SmallText } from '@/commons/atoms/text/Typography';
 import LikeButton from '@/commons/atoms/buttons/LikeButton';
 import DeleteModal from '@/components/modal/DeleteModal';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
-import PortfolioTag from '@/commons/molecules/tag/Tag';
 import { BsArrowReturnLeft } from 'react-icons/bs';
+import dummy from './dummy.data.json';
+import useUserImageHandler from '@/hooks/useUserImageHandler';
+import { ItemUserName } from '@/components/communityItem/CommunityItem.styled';
 
 export default function PortfolioDetail() {
+  // console.log(dummy[0].data);
+  const temp = dummy[0].data;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [portfolio, setPortfolio] = useState<Portfolio>();
+  const [portfolio, setPortfolio] = useState<any>(temp);
   const [createdAt, setCreatedAt] = useState<string>('');
   const [member, setMember] = useState<Member>();
 
@@ -41,27 +48,48 @@ export default function PortfolioDetail() {
   const onEditButtonClick = () => window.location.href = `/portfolio/edit?portfolioId=${portfolioId}`;
   const openDeleteModal = () => setIsModalOpen(!isModalOpen);
   const deletePortfolioHandler = () => {
-    deletePortfolio();
+    // deletePortfolio();
     navigate('/main');
   };
+  // useEffect(() => {
+  //   getPortfolio().then((res) => {
+  //     console.log(res.data);
+  //     console.log(res.data.content);
+  //     setPortfolio(res.data);
+  //     setMember(res.data.member);
+  //     setCreatedAt(changeDateFormat(res.data.createdAt));
+  //   });
+  // }, []);
 
-  useEffect(() => {
-    getPortfolio().then((res) => {
-      console.log(res.data);
-      console.log(res.data.content);
-      setPortfolio(res.data);
-      setMember(res.data.member);
-      setCreatedAt(changeDateFormat(res.data.createdAt));
-    });
-  }, []);
-
+  const [userProfileImage, _] = useState<string | JSX.Element>(useUserImageHandler(12));
+  const pic = typeof userProfileImage === 'string' ? userProfileImage : undefined;
+  
   return (
-    <FlexColumnContainer bg="rgba(16, 16, 21, 1)">
+    <DetailContainer >
       <ButtonHeader>
-        <BsArrowReturnLeft size={30} color="white" className="cursor-pointer" onClick={() => navigate(-1)} />
+        <BsArrowReturnLeft size={30} color="black" className="cursor-pointer" onClick={() => navigate(-1)} />
       </ButtonHeader>
-
       <ContentContainer>
+        <UserContainer>
+          <Image src={pic} url={`/`} shape="circle" size={65} />
+          <UserCard>
+            <HeadingText color="black">{portfolio.title}</HeadingText>
+            <SmallRowContainer>
+              <ItemUserName>{portfolio.member.name}</ItemUserName>
+              <SmallText color="gray">{portfolio.createdAt}</SmallText>
+            </SmallRowContainer>
+          </UserCard>
+          <AskCommisionBtn>의뢰 요청</AskCommisionBtn>
+        </UserContainer>
+        <BodyText color="black">{portfolio.explains}</BodyText>
+
+        {portfolio?.writer && (
+          <FlexEndWrapper>
+            <EditButton onClick={openDeleteModal} />
+            <DeleteButton onClick={openDeleteModal} />
+          </FlexEndWrapper>
+        )}
+
         <PortfolioContainer>
           {portfolio && (
             <div
@@ -72,51 +100,26 @@ export default function PortfolioDetail() {
           )}
         </PortfolioContainer>
 
-        <UserContainer>
-          <UserCard>
-            <FlexBetweenWrapper>
-              {portfolio && (
-                <>
-                  <LikeButton
-                    portfolioId={portfolio.id}
-                    currentLikes={portfolio.countLikes}
-                    isToggled={portfolio.liked}
-                  />
-                  <FlexWrapper gap={20}>
-                    <SmallText color="white">views · {portfolio.view}</SmallText>
-                    <Bookmark portfolioId={portfolio.id} isToggled={portfolio.marked} />
-                  </FlexWrapper>
-                </>
-              )}
-            </FlexBetweenWrapper>
-            {member && <MemberProfile type="portfolio" member={member} />}
-            <Center>
-              <AskCommisionBtn>의뢰 요청</AskCommisionBtn>
-            </Center>
-            {portfolio && (
-              <>
-                <HeadingText color="white">{portfolio.title}</HeadingText>
-                <SmallText color="white">{createdAt}</SmallText>
-                <BodyText color="white">{portfolio.explains}</BodyText>
-              </>
-            )}
-            {portfolio?.writer && (
-              <FlexEndWrapper>
-                <EditButton onClick={onEditButtonClick} />
-                <DeleteButton onClick={openDeleteModal} />
-              </FlexEndWrapper>
-            )}
-          </UserCard>
+        <FlexBetweenWrapper>
+                {portfolio && (
+                  <>
+                    <LikeButton
+                      portfolioId={portfolio.id}
+                      currentLikes={portfolio.countLikes}
+                      isToggled={portfolio.liked}
+                    />
+                    <FlexWrapper gap={20}>
+                      <SmallText color="white">views · {portfolio.view}</SmallText>
+                      <Bookmark portfolioId={portfolio.id} isToggled={portfolio.marked} />
+                    </FlexWrapper>
+                  </>
+                )}
+        </FlexBetweenWrapper>
 
-          <UserCard>
-            <LabelText color="white">Tags</LabelText>
-            <FlexWrapper gap={8}>
-              {portfolio && portfolio.portfolioTags.map((tag: Tag) => <PortfolioTag tag={tag} key={tag.id} readOnly={true} />)}
-            </FlexWrapper>
-          </UserCard>
-        </UserContainer>
+        <SmallPortfolioContainer></SmallPortfolioContainer>
+        
       </ContentContainer>
-      {isModalOpen && <DeleteModal onConfirm={deletePortfolioHandler} onCancel={openDeleteModal} />}
-    </FlexColumnContainer>
+      {isModalOpen && <DeleteModal onConfirm={deletePortfolio} onCancel={openDeleteModal} />}
+    </DetailContainer>
   );
 }

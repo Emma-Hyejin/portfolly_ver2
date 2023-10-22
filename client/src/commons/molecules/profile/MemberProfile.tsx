@@ -22,10 +22,11 @@ const ImageSizes: any = {
 
 const MemberProfile = ({ type, member, date }: MemberProfile) => {
   const itemPic = member.imageUrl === null ? circleNoImg : member.imageUrl;
+  const src = typeof itemPic === 'string' ? itemPic : undefined;
   return (
     <MemberProfileWrapper>
       <h3>짱구님</h3>
-      <Image src={itemPic} url={`/members/${member.id}`} shape="circle" size={ImageSizes[type]} />
+      <Image src={src} url={`/members/${member.id}`} shape="circle" size={ImageSizes[type]} />
       {type === 'portfolio' && <Label text={member.name} type={type} url={`/members/${member.id}`} />}
       {type !== 'portfolio' && (
         <ColumnWrapper>

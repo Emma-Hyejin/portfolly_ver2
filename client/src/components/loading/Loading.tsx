@@ -1,13 +1,12 @@
-import loading_err from '@/assets/loading_err.png';
+import LoadingRainbow from '@/assets/loading/loading_rainbow.gif';
 
 export default function Loading () {
     return(
-        <main className="bg-BASIC_BLACK w-screen h-screen
-         text-POINT_COLOR text-[180px] flex flex-col justify-center items-center">
+        <main className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-gray-500 opacity-50 z-9">
             <span className="absolute transform">
-                <img src={loading_err} alt="졸라맨 404" className="w-10 h-10 translate-x-1"/>
+                <img src={LoadingRainbow} alt=" 404" />
             </span>
-            404
         </main>
     )
 }
+

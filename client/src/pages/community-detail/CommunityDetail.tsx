@@ -12,7 +12,7 @@ import { CommuProps } from '@/types';
 
 import { CmDContainer, CommentContainer, TitleContainer, MainContainer, PageWrapper } from './CommunityDetail.styled';
 
-export default function CommunityDetail({ handleClick }: any) {
+export default function CommunityDetail() {
   const [memberData, setMemberData] = useState<CommuProps | null>(null);
   const [clickDeletePost, setClickDeletePost] = useState(false);
   //야매로 트리거
@@ -77,7 +77,7 @@ export default function CommunityDetail({ handleClick }: any) {
         />
         <h1>{memberData.title}</h1>
       </TitleContainer>
-      <MainContainer onClick={handleClick}>
+      <MainContainer>
         <CmDContainer>
           <DetailContents
             data={memberData}

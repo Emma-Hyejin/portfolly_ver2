@@ -4,7 +4,7 @@ import {
   CommunityContents,
   CommunityImage,
 } from './CommunitySection.styled';
-import communityExampleImage from '@/assets/whiteNoImg.png';
+import communityExampleImage from '@/assets/commuThumbnail.png';
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 
 export default function PortfolioSection() {

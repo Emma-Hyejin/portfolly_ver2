@@ -2,11 +2,7 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 
 export const SectionWrapper = styled.div`
-  ${tw`
-    flex
-    items-center
-    justify-between
-  `}
+  ${tw`flex items-center justify-between `}
   // border: 1px solid blue;
   height: 500px;
   margin: 100px 0;
@@ -40,19 +36,13 @@ export const PortfolioContents = styled.div`
 
 export const PortfolioImage = styled.img`
   border-radius: 100%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   width: 500px;
   height: 500px;
 `;
 
 export const PortfolioMiniImage = styled.img`
-${tw`
-  absolute
-  top-5
-  right-5
-  shadow-lg
-  z-1
-  animate-bounce
-`}
+${tw`absolute z-10 shadow-lg top-5 right-5 animate-bounce`}
   border-radius: 100%;
   width: 100px;
   height: 100px;

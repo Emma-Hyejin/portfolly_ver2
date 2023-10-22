@@ -58,7 +58,7 @@ export interface Styledprops extends DetailedHTMLProps<ButtonHTMLAttributes<HTML
 
 //0707 혜진 community-main:<data> commu
 export interface CommuProps {
-  memberInfo: memberInfo;
+  memberInfo: memberInfoProps;
   member: any;
   id: number;
   title: string;
@@ -70,7 +70,7 @@ export interface CommuProps {
   modifiedAt: string;
   memberId: number;
   status: string;
-  comments?: CommentProps[];
+  comments: CommentProps[];
   pageInfo?: Pagenation;
 }
 
@@ -82,6 +82,7 @@ export interface CommentProps {
   createdAt: string;
   modifiedAt: string;
   status: string;
+  memberInfo: memberInfoProps;
 }
 //0714 혜진 Pagenation
 export interface Pagenation {
@@ -96,8 +97,8 @@ export interface MainCategory {
   data: [];
 }
 
-export interface memberInfo {
+export interface memberInfoProps {
   memberId: number;
   name: string;
-  imgUrl?: string;
+  imageUrl: string | null;
 }

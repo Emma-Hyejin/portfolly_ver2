@@ -89,7 +89,7 @@ export default function Main() {
       <PortfolioLanking />
       <TitleSection>
         <h1>Portfolio</h1>
-        <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
+        <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs}  type={"home"}/>
         <Link to='/portfolio/edit'>
           <WriteButton>포트폴리오 등록</WriteButton>
         </Link>
