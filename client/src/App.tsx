@@ -17,10 +17,15 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import SignupAgree from './pages/signup/SignupAgree';
 import MainLayout from './commons/styles/layout/MainLayout';
 
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools/build/lib/devtools';
 const App = () => {
   const clientId =
-    '363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com';
+    '363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com'
+  ;
+  const queryClient = new QueryClient();
   return (
+    <QueryClientProvider client={queryClient}>
     <GoogleOAuthProvider clientId={clientId}>
       <Provider store={store}>
         <BrowserRouter>
@@ -43,6 +48,8 @@ const App = () => {
         </BrowserRouter>
       </Provider>
     </GoogleOAuthProvider>
+
+    </QueryClientProvider>
   );
 };
 

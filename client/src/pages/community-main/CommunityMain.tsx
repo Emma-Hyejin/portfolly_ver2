@@ -34,16 +34,19 @@ import datano from '@/assets/datano.png';
 
 import AlertModal from '@/components/modal/AlertModal';
 import Loading from '@/components/loading/Loading';
+import { useQuery } from '@tanstack/react-query';
 
 export default function CommunityMain() {
-  const [data, setData] = useState<CommuProps[]>([]);
+  const [commuData, setCommuData] = useState<CommuProps[]>([]);
+  //원래 data, setData
   const [filteredData, setFilteredData] = useState<CommuProps[]>([]);
   const [division, setDivision] = useState('COOPERATION');
   const [openAlert, setOpenAlert] = useState(false);
   const navigate = useNavigate();
   //인기순 필터 적용 및 베스트 게시굴에서 사용.
-  const sortedData = [...data].sort((acc:CommuProps, cur:CommuProps) => cur.view - acc.view);
-  const [isLoading, setIsLoading] = useState(true);
+  const sortedData = [...commuData].sort((acc:CommuProps, cur:CommuProps) => cur.view - acc.view);
+  const [isWating, setIsWating] = useState(true);
+  //원래 isLoading, setIsLoading
   const [currentSearch, setCurrentSearch] = useState('');
   const [timeUpdate, setTime] = useState(() => {
     const currentTime = new Date(new Date().getTime());
@@ -60,19 +63,35 @@ export default function CommunityMain() {
 
   const currentLoginState = useSelector((state: RootState) => state.loginSlice.isLogin);
 
-  useEffect(() => {
-    const showWholeCommu = async () => {
-      await axios
-        .get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`)
-        .then((res) => {
-          console.log(res.data.data);
-          setData(res.data.data);
-          setIsLoading(false);
-        });
-    };
+//   useEffect(() => {
+//     const showWholeCommu = async () => {
+//       await axios
+//         .get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`)
+//         .then((res) => {
+//           console.log(res.data.data);
+//           setCommuData(res.data.data);
+//           setIsWating(false);
+//         });
+//     };
 
-    showWholeCommu();
-  }, [division]);
+//     showWholeCommu();
+//  }, [division]);
+
+  //https://velog.io/@kandy1002/React-Query-%ED%91%B9-%EC%B0%8D%EC%96%B4%EB%A8%B9%EA%B8%B0
+  //react-Query 시도
+  const {data} = useQuery(['communityData', division], async () => {
+    const response = await axios.get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`);
+    const responseData = response.data.data;
+    setCommuData(responseData);
+    return responseData;    
+  }, {
+    enabled: !!division,
+    refetchOnWindowFocus: false,
+  });
+
+  console.log(data);
+  // if(isLoading) return <p>Loading...</p>;
+  // if(isError) return isError;
 
   //업데이트 시간 세팅
   const handleTime = () => {
@@ -97,8 +116,8 @@ export default function CommunityMain() {
   }, [timeUpdate]);
 
   useEffect(() => {
-    setFilteredData(data);
-  }, [data])
+    setFilteredData(commuData);
+  }, [commuData])
 
   const [ isClicked, setIsClicked ]  = useState({
     division: false,
@@ -121,7 +140,7 @@ export default function CommunityMain() {
 
   const FilterData = (filterType:string) => {
     if(filterType === 'recent'){
-      setFilteredData(data);
+      setFilteredData(commuData);
       handleFilterClick();
     }
     if(filterType === 'popular'){
@@ -155,9 +174,9 @@ export default function CommunityMain() {
 
 
   return (
-    <>{isLoading ? (
-      <Loading/> 
-    ):(
+    // <>{isWating ? (
+    //   <Loading/> 
+    // ):(
     <CommunityWrapper>
     <CommunityMainWrapper>
       <TitleSectionCommu/>
@@ -173,7 +192,7 @@ export default function CommunityMain() {
         <Search
           setSearchValue={setCurrentSearch}
           currentSearch={currentSearch}
-          data={data}
+          data={commuData}
           setSearchs={setFilteredData}
         />
       </SearchContainer>
@@ -221,7 +240,7 @@ export default function CommunityMain() {
       </SideBoxWrapper>
     </RightSideWrapper>
     </CommunityWrapper>
-    )}
-    </>
+    // )}
+    // </>
   );
 }
