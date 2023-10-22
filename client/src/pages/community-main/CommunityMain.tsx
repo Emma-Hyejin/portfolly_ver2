@@ -33,7 +33,7 @@ import { NodataImage } from '../main/Main.styled';
 import datano from '@/assets/datano.png';
 
 import AlertModal from '@/components/modal/AlertModal';
-import Loading from '@/components/loading/Loading';
+//import Loading from '@/components/loading/Loading';
 import { useQuery } from '@tanstack/react-query';
 
 export default function CommunityMain() {
@@ -45,7 +45,7 @@ export default function CommunityMain() {
   const navigate = useNavigate();
   //인기순 필터 적용 및 베스트 게시굴에서 사용.
   const sortedData = [...commuData].sort((acc:CommuProps, cur:CommuProps) => cur.view - acc.view);
-  const [isWating, setIsWating] = useState(true);
+  //const [isWating, setIsWating] = useState(true);
   //원래 isLoading, setIsLoading
   const [currentSearch, setCurrentSearch] = useState('');
   const [timeUpdate, setTime] = useState(() => {
@@ -79,7 +79,7 @@ export default function CommunityMain() {
 
   //https://velog.io/@kandy1002/React-Query-%ED%91%B9-%EC%B0%8D%EC%96%B4%EB%A8%B9%EA%B8%B0
   //react-Query 시도
-  const {data} = useQuery(['communityData', division], async () => {
+  const {data, isError} = useQuery(['communityData', division], async () => {
     const response = await axios.get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`);
     const responseData = response.data.data;
     setCommuData(responseData);
@@ -90,8 +90,8 @@ export default function CommunityMain() {
   });
 
   console.log(data);
-  // if(isLoading) return <p>Loading...</p>;
-  // if(isError) return isError;
+  // if(isLoading) return <Loading/>;
+  if(isError) return isError;
 
   //업데이트 시간 세팅
   const handleTime = () => {
