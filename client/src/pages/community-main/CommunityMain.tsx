@@ -63,26 +63,13 @@ export default function CommunityMain() {
 
   const currentLoginState = useSelector((state: RootState) => state.loginSlice.isLogin);
 
-//   useEffect(() => {
-//     const showWholeCommu = async () => {
-//       await axios
-//         .get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`)
-//         .then((res) => {
-//           console.log(res.data.data);
-//           setCommuData(res.data.data);
-//           setIsWating(false);
-//         });
-//     };
-
-//     showWholeCommu();
-//  }, [division]);
-
-  //https://velog.io/@kandy1002/React-Query-%ED%91%B9-%EC%B0%8D%EC%96%B4%EB%A8%B9%EA%B8%B0
+  //참고 : https://velog.io/@kandy1002/React-Query-%ED%91%B9-%EC%B0%8D%EC%96%B4%EB%A8%B9%EA%B8%B0
   //react-Query 시도
   const {data, isError} = useQuery(['communityData', division], async () => {
     const response = await axios.get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`);
     const responseData = response.data.data;
     setCommuData(responseData);
+    // setIsWating(false); - isLoading 처리예정
     return responseData;    
   }, {
     enabled: !!division,
@@ -90,7 +77,7 @@ export default function CommunityMain() {
   });
 
   console.log(data);
-  // if(isLoading) return <Loading/>;
+  // if(isLoading) return <Loading/>; - hook render 에러 발생
   if(isError) return isError;
 
   //업데이트 시간 세팅
