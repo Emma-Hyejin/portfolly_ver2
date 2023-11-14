@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import userImg from '../../../assets/userImg.jpg';
 import { ImgContainer, UserImage } from './UserImg.styled';
-import HeaderDropwdown from '@/components/headerDropdown/HeaderDropdown';
+import DropDownBox from '../dropdown/DropDownBox';
 
 export default function UserImg() {
   const [ isDropdown, setIsDropdown ] = useState(false);
@@ -17,7 +17,7 @@ export default function UserImg() {
         {
           isDropdown ? 
             (
-              <HeaderDropwdown/>
+              <DropDownBox isOpen={false}/>
             )
           : null
         }
