@@ -11,7 +11,7 @@ import Comment from '@/commons/molecules/comment/Comment';
 import { FlexColumnContainer } from '@/commons/styles/Containers.styled';
 import CommentWriteBox from '@/commons/molecules/comment/CommentWriteBox';
 import { JbWrapper } from '@/pages/community-detail/CommunityDetail.styled';
-import noComment from '@/assets/noComment.png';
+// import noComment from '@/assets/noComment.png';
 import netaxios from '@/utils/axiosIntercept';
 import CommentList from './commentList';
 

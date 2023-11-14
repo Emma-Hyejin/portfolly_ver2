@@ -11,7 +11,7 @@ import DeleteModal from '@/components/modal/DeleteModal';
 import { CommuProps } from '@/types';
 
 import { CmDContainer, CommentContainer, TitleContainer, MainContainer, PageWrapper } from './CommunityDetail.styled';
-import axios from 'axios';
+// import axios from 'axios';
 
 export default function CommunityDetail() {
   const [memberData, setMemberData] = useState<CommuProps | null>(null);
@@ -21,7 +21,7 @@ export default function CommunityDetail() {
   const navigate = useNavigate();
   const { id: boardId } = useParams();
   // console.log(boardId);
-  const TOKEN = localStorage.getItem('accessToken');
+  // const TOKEN = localStorage.getItem('accessToken');
   const handleRender = () => {
     setRender(!render);
   };
