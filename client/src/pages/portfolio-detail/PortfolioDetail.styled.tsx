@@ -1,59 +1,88 @@
-import { Purpletype } from '@/commons/atoms/buttons/Button.styled';
 import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
 import ReviseBtn from '@/commons/atoms/buttons/revise-remove/ReviseBtn';
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
 
+
+export const DetailContainer = tw.div`
+  flex
+  flex-col
+  mx-auto
+  w-4/5
+`;
 export const ContentContainer = styled.div`
-  ${tw`flex gap-8 px-6 w-full h-fit`}
+  ${tw`flex flex-col gap-3 px-6 w-full h-fit`}
 `
 
 export const ButtonHeader = tw.div`
   w-full py-5 px-8
 `
+export const SmallRowContainer = tw.div`
+  flex
+  flex-row
+  justify-start
+  gap-3
+`;
 
 const RoundedBox = tw.div`
   rounded-xl
   w-full 
-  break-words
-  overflow-hidden
-  text-white
-`
+`;
 
 export const PortfolioContainer = styled(RoundedBox)`
   ${tw`
-    w-3/4
-    bg-black
-    text-white
+  bg-gray-50
+    w-full
     py-10
     px-14
-    overflow-y-auto
+    h-fit
   `}
-  height: calc(100vh - 70px);
+`;
+
+export const SmallPortfolioContainer = styled(RoundedBox)`
+  ${tw`
+    w-full
+    bg-pink-200
+    py-10
+    px-14
+    my-10
+    h-fit
+  `}
 `;
 
 export const UserContainer = styled.div`
 ${tw`
-  flex flex-col
-  w-1/4
-  h-full
-  overflow-y-auto
+  flex flex-row
+  h-[120px]
+  items-center
 `}
-  height: calc(100vh - 70px);
+  /* height: calc(100vh - 70px); */
 `;
 
-export const UserCard = styled(RoundedBox)`
-  ${tw`flex flex-col p-8 gap-6 mb-5 h-fit overflow-visible`}
-  background-color: rgba(32, 32, 36, 1);
-`
+export const UserCard = styled.div`
+  ${tw`flex flex-col flex-1
+  py-8 gap-2 h-fit px-8
+  `}
+`;
 
 export const EditButton = styled(ReviseBtn)``;
 export const DeleteButton = styled(RemoveBtn)``;
 
-export const AskCommisionBtn = tw(Purpletype)`
+export const AskCommisionBtn = styled.button`
+  ${tw`
+  bg-BASIC_LINE
+  text-BASIC_PURPLE
   w-[200px]
   px-5
   py-2
   rounded-md
   text-base
+  h-fit
+  `}
+
+  &:hover{
+    background-color: #8580E1;
+    color: #eeee;
+  }
+ 
 `;

@@ -9,7 +9,7 @@ import {
   AnimationCategoryDatas,
   GraphicCategoryDatas,
   PhotoCategoryDatas,
-} from './infiniteScrollData';
+} from './portfolios';
 //CommuProps,
 import { Portfolio } from '@/types';
 

@@ -20,13 +20,6 @@ export default function Signup () {
         
     }
 
-    const handleTime = () => {
-
-    // setTimeout(handleWelcome, 3000 );
-    console.log(" 실행");
-    }
-
-
     return(
         <>
         {welcome === true ? (

@@ -2,13 +2,14 @@ import { ChangeEventHandler } from 'react';
 import { SearchBox, SearchContainer, SearchIcon } from './Search.styled';
 
 interface SearchProps {
-  setSearchValue: any,
-  currentSearch: string,
-  data: any,
-  setSearchs: any,
+  setSearchValue: any;
+  currentSearch: string;
+  data: any;
+  setSearchs: any;
+  type?: string;
 }
 
-export default function Search({ setSearchValue, currentSearch, data, setSearchs }: SearchProps) {
+export default function Search({ setSearchValue, currentSearch, data, setSearchs, type }: SearchProps) {
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setSearchValue(event.target.value);
   };
@@ -59,7 +60,7 @@ export default function Search({ setSearchValue, currentSearch, data, setSearchs
   return (
     <SearchContainer onSubmit={enterToSearch}>
       <SearchIcon />
-      <SearchBox type="text" placeholder='포트폴리오 검색' onChange={handleChange} />
+      <SearchBox type="text" placeholder={type === "home" ? '포트폴리오 검색' :'게시글 검색'} onChange={handleChange} />
     </SearchContainer>
   );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { call } from '@/utils/apiService';
 
@@ -11,8 +11,9 @@ import DeleteModal from '@/components/modal/DeleteModal';
 import { CommuProps } from '@/types';
 
 import { CmDContainer, CommentContainer, TitleContainer, MainContainer, PageWrapper } from './CommunityDetail.styled';
+import axios from 'axios';
 
-export default function CommunityDetail({ handleClick }: any) {
+export default function CommunityDetail() {
   const [memberData, setMemberData] = useState<CommuProps | null>(null);
   const [clickDeletePost, setClickDeletePost] = useState(false);
   //야매로 트리거
@@ -20,26 +21,41 @@ export default function CommunityDetail({ handleClick }: any) {
   const navigate = useNavigate();
   const { id: boardId } = useParams();
   // console.log(boardId);
-
+  const TOKEN = localStorage.getItem('accessToken');
   const handleRender = () => {
     setRender(!render);
   };
 
-  useEffect(() => {
-    const findBoardsById = (id: string) => call(`/boards/${id}`, 'GET', null);
-    const getMember = async () => {
-      //axiosMember(xxx) 이름에서부터 유추 (한글 직독직 -> 영어)
-      return findBoardsById(boardId as string)
-        .then((res) => {
-          setMemberData(res);
-          console.log(res);
-        })
-        .catch((err) => console.log('커뮤니티 상세 페이지 예시' + err));
-    };
+  const findBoardsById = (id: string) => call(`/boards/${id}`, 'GET', null);
 
+  const getMember = useCallback(async() => {
+    await findBoardsById(boardId as string)
+    .then((res) => {
+      setMemberData(res);
+      console.log(res);
+    })
+    .catch((err) => console.log(err));
+  }, [setMemberData]);
+
+  useEffect(() => {
     getMember();
-    console.log(memberData);
-  }, [boardId, render]);
+  }, [getMember, boardId])
+
+  // useEffect(() => {
+  //   const findBoardsById = (id: string) => call(`/boards/${id}`, 'GET', null);
+  //   const getMember = async () => {
+  //     //axiosMember(xxx) 이름에서부터 유추 (한글 직독직 -> 영어)
+  //     return findBoardsById(boardId as string)
+  //       .then((res) => {
+  //         setMemberData(res);
+  //         console.log(res);
+  //       })
+  //       .catch((err) => console.log('커뮤니티 상세 페이지 예시' + err));
+  //   };
+
+  //   getMember();
+  //   console.log(memberData);
+  // }, [boardId, render]);
 
   if (!memberData)
     return (
@@ -77,7 +93,7 @@ export default function CommunityDetail({ handleClick }: any) {
         />
         <h1>{memberData.title}</h1>
       </TitleContainer>
-      <MainContainer onClick={handleClick}>
+      <MainContainer>
         <CmDContainer>
           <DetailContents
             data={memberData}

@@ -2,13 +2,21 @@ import { FlexColumnContainer } from '@/commons/styles/Containers.styled';
 import { styled, css } from 'styled-components';
 import tw from 'twin.macro';
 
-export const EditorContainer = styled(FlexColumnContainer)``
-
-const CircleBtn = css`
-    ${tw`rounded-full inline-flex justify-center items-center`}
+export const EditorContainer = styled(FlexColumnContainer)`
+  ${tw`md:mx-auto mx-0 h-fit w-screen md:min-w-[800px]`}
+  /* border: 3px solid red; */
+  /* display: inline-block; */
 `
 
-export const PortfolioEditButton = styled.button<{ color: 'light' | 'dark' | 'black' }>`
+const CircleBtn = css`
+    ${tw`inline-flex items-center justify-center rounded-full`}
+`
+
+const SquareBtn = css`
+  ${tw`inline-flex items-center justify-center rounded-lg`}
+`
+
+export const PortfolioEditButton = styled.button<{ color: 'light' | 'dark' | 'black' | 'purple' }>`
     ${CircleBtn}
     width: 63px;
     height: 63px;
@@ -33,8 +41,19 @@ export const PortfolioEditButton = styled.button<{ color: 'light' | 'dark' | 'bl
         border: 1px solid black;
       `
   }
+
+  ${SquareBtn}
+    width:63px;
+    height:30px;
+    ${(props) => props.color === 'purple' &&
+    css`
+        background-color: #8580E1;
+        color:#EEE;
+        border: 1px solid rgba(109, 107, 107, 0.62);
+      `
+  }
 `
 
 export const PortfolioCheckButton = tw(PortfolioEditButton)`
-  absolute bottom-10 right-16
+  
 `

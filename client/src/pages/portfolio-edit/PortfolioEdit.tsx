@@ -1,6 +1,5 @@
-/* 2023-07-06 포트폴리오 작성/수정 페이지 - 김다함 */
 import { useSearchParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import usePreventRefresh from '@/hooks/usePreventRefresh';
@@ -8,14 +7,11 @@ import usePreventGoBack from '@/hooks/usePreventGoBack';
 import { setPortfolio } from '@/store/portfolioSlice';
 import { call, changeDateFormat } from '@/utils';
 
-import { EditorContainer, PortfolioCheckButton } from '@/pages/portfolio-edit/PortfolioEdit.styled';
+import { EditorContainer } from '@/pages/portfolio-edit/PortfolioEdit.styled';
 import QuillEditor from '@/components/editor/QuillEditor';
 import TitleForm from '@/components/titleForm/TitleForm';
-import LogoHeader from '@/components/header/LogoHeader';
-import { BsCheck2 } from 'react-icons/bs';
 
 export default function PortfolioEdit() {
-  const [isTitleFormOpen, setIsTitleFormOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
 
@@ -46,16 +42,16 @@ export default function PortfolioEdit() {
 
   return (
     <EditorContainer>
-      <LogoHeader />
-      <QuillEditor isTitleFormOpen={isTitleFormOpen} />
-      {isTitleFormOpen &&
+      <TitleForm  />
+      <QuillEditor isTitleFormOpen={true} />
+      {/* {isTitleFormOpen &&
         <TitleForm setIsTitleFormOpen={setIsTitleFormOpen} />
-      }
-      <PortfolioCheckButton
+      } */}
+      {/* <PortfolioCheckButton
         color="black"
         onClick={() => setIsTitleFormOpen(true)}>
         <BsCheck2 size="25" color="white" />
-      </PortfolioCheckButton>
+      </PortfolioCheckButton> */}
     </EditorContainer>
   );
 }

@@ -35,6 +35,8 @@ export const CommunityContents = styled.div`
 
 export const CommunityImage = styled.img`
   border-radius: 100%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   width: 500px;
   height: 500px;
+  margin-right: 10px;
 `;

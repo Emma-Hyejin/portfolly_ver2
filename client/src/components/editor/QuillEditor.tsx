@@ -4,13 +4,13 @@ import { memo, useMemo, useRef } from 'react';
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from 'react-quill';
 
-import { Quill } from '@/types';
 import { portfolio, setHtmlContent } from '@/store/portfolioSlice';
 import useImageHandler from '@/hooks/useImageHandler';
 
 import { QuillWrapper } from '@/components/editor/Editor.styled';
 
-const QuillEditor = memo(({ isTitleFormOpen }: Quill) => {
+const QuillEditor = memo((props: {isTitleFormOpen: boolean}) => {
+  const isTitleFormOpen = props.isTitleFormOpen;
   const [imageUrlHandler, imageHandler] = useImageHandler();
   const savedPortfolio = useSelector(portfolio);
   const quillRef = useRef<ReactQuill>();

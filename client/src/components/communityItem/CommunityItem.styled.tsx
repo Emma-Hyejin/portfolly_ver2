@@ -1,30 +1,20 @@
 import tw from 'twin.macro';
 import styled from 'styled-components';
-import { LiaHeartSolid } from "react-icons/lia";
 
 export const CommunityItemWrapper= styled.div`
-  ${tw`
-    w-full
-    h-52
-    flex
-    flex-row
-    border
-    border-BASIC_BORDER
-    relative
-    p-4
-    mt-2
-    mb-5
-    rounded-lg
-    shadow-lg
-    cursor-pointer
-  `}
+  ${tw`relative flex flex-col w-full p-4 mt-2 mb-5 border rounded-lg shadow-lg cursor-pointer h-52 md:flex-row border-BASIC_BORDER`}
 `;
 
 export const ItemUserWrapper = tw.div`
   flex
-  flex-col
+  flex-row
+  md:flex-col
   items-center
-  px-5
+  px-2
+  pb-3
+  md:px-5
+  md:w-24
+  text-center
 `;
 
 export const ItemTextWrapper = tw.div`
@@ -36,15 +26,18 @@ export const ItemTextWrapper = tw.div`
 `;
 
 export const ItemTitle = tw.div`
-  font-medium
-  text-xl
+  md:font-medium
+  md:text-xl
+  font-semibold
+  text-sm
   mb-2
 `;
 
 export const ItemContent = tw.div`
-  font-light
-  text-sm
-  flex-1
+  hidden
+  md:font-light
+  md:text-sm
+  md:flex-1
 `;
 
 export const TagSection = tw.div`
@@ -53,8 +46,8 @@ export const TagSection = tw.div`
   text-xs
   font-semibold
   px-4
-  my-3
-  mr-3
+  md:my-3
+  md:mr-3
   py-1
   w-fit
   rounded-md
@@ -62,7 +55,10 @@ export const TagSection = tw.div`
 
 export const ItemInfoWrapper = tw.div`
   flex
-  flex-col
+  md:flex-col
+  flex-row
+  justify-between
+  items-end
   px-3
 `;
 
@@ -76,13 +72,14 @@ export const ItemUserName = tw.div`
   font-normal
   text-sm
   text-BASIC_TEXT
+  px-2
+  md:p-0
 `;
 
 export const ItemLikeButton = tw.button`
-  bg-pink-200
   flex
   flex-row
-  flex-1
+  md:flex-1
   justify-center
   items-center
 `;

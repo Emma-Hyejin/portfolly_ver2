@@ -1,0 +1,38 @@
+[
+  {
+    "data": {
+      "id": 1,
+      "title": "뉴진스의 음악",
+      "content": "<iframe src='https://www.youtube.com/embed/pK20ppd_YQI' title='New jeans all music playlist [Updated] July 2023 🌷' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' allowfullscreen></iframe>\n<p dir='auto'><br/><br/>뉴진스의 음악입니다.",
+      "explains": "뉴진스 음악 포트폴리오",
+      "view": 30,
+      "createdAt": "2023-06-21T17:34:51.3395597",
+      "modifiedAt": "2023-06-21T17:34:51.3395597",
+      "category": {
+        "id": 1,
+        "name": "web"
+      },
+      "member": {
+        "id": 4,
+        "name": "민희진",
+        "imageUrl": "https://lh3.google.com/u/0/ogw/AGvuzYbCDcprvYxmksNeswTW8vXMfMcfc9B8PbN4Lyvc=s64-c-mo"
+      },
+      "portfolioTags": [
+        {
+          "id": 1,
+          "name": "music",
+          "isSelected": false
+        },
+        {
+          "id": 2,
+          "name": "video",
+          "isSelected": false
+        }
+      ],
+      "countLikes": 20,
+      "marked": false,
+      "liked": true,
+      "writer": true
+    }
+  }
+]

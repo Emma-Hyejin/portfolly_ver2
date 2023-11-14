@@ -1,10 +1,12 @@
 import tw from 'twin.macro';
 import { styled } from 'styled-components';
 import { LiaMapPinSolid, LiaHeartSolid } from 'react-icons/lia'
+import { Link } from 'react-router-dom';
 
 export const CommunityWrapper = tw.div`
   flex
-  flex-row
+  flex-col
+  md:flex-row
   mx-auto
   w-4/5
 `;
@@ -12,36 +14,34 @@ export const CommunityWrapper = tw.div`
 
 export const CommunityMainWrapper = styled.div`
   ${tw`
-    w-full flex flex-col max-w-[690px] min-w-[550px]
+    w-full flex flex-col md:max-w-[690px] md:min-w-[550px]
   `}
 `;
 
 export const SearchContainer = tw.div`
-  w-1/2
+  md:mb-10
+  mb-2
+  md:w-1/2
+  w-full
   flex
   justify-center
   items-center
   mx-auto
-  mt-10
 `;
 
 export const CommunityItemWrapper = tw.div`
   flex
   flex-col
   px-5
+  max-h-[500px] overflow-y-scroll
+  mb-5
+  md:m-0
+  border-b-2
+  md:border-0
 `;
 
 export const WritingButton = styled.button`
-  ${tw`
-  bg-BASIC_LINE
-  text-BASIC_PURPLE
-  font-semibold
-  text-sm
-  px-5
-  py-1
-  mb-10
-  w-40
-  rounded-lg`}
+  ${tw`w-32 px-5 py-1 mb-5 text-sm font-semibold rounded-lg md:w-40 bg-BASIC_LINE text-BASIC_PURPLE md:mb-10`}
 
   &:hover{
     background-color: #8580E1;
@@ -53,11 +53,7 @@ export const WritingButton = styled.button`
 
 const BigTitleCommu = styled.div`
   font-family: 'Inconsolata', sans-serif;
-  ${tw`
-    text-4xl
-    mb-3
-    mt-10
-  `}
+  ${tw`mt-3 mb-3 text-xl font-semibold md:font-normal md:text-4xl md:mt-10 `}
                                                 
 `;
 export const TitleSectionCommu = () => {
@@ -66,7 +62,7 @@ export const TitleSectionCommu = () => {
       <BigTitleCommu>
         Community
       </BigTitleCommu>
-      <div className="text-BASIC_GRAY mb-5">
+      <div className="mb-3 text-xs md:mb-5 text-BASIC_GRAY md:text-base">
         동료를 찾거나 의견을 나누는 공간입니다 함께 여행 중인 당신의 생각을 들려주세요.
       </div>
     </div>
@@ -75,26 +71,30 @@ export const TitleSectionCommu = () => {
 
 export const DivisionWrapper = tw.div`
   flex
-  flex-row
-  justify-between
+  md:flex-row
+  flex-col
+  md:justify-between
   pb-3
   border-b-2
   mr-3
 `;
 
 export const DivisionBox = tw.div`
-  divide-x
+  md:divide-x
   divide-slate-500
 `;
 
 export const DivisionTitle = styled.button`
   font-family: 'Inconsolata', sans-serif;
-  ${tw`
-    text-xl
-    px-3
-  `}
+  ${tw`pr-3 text-sm md:px-3 md:text-xl`}
 
   &:hover, &:active, &:focus{
+    font-weight: bolder;
+    color: #8580E1;
+    border-bottom:3px solid #8580E1;
+  }
+
+  &.clicked {
     font-weight: bolder;
     color: #8580E1;
     border-bottom:3px solid #8580E1;
@@ -103,35 +103,28 @@ export const DivisionTitle = styled.button`
 
 export const DivisionFilter = styled.button`
   font-family: 'Inconsolata', sans-serif;
-  ${tw`
-    text-sm
-    text-BASIC_GRAY
-    font-normal
-    px-2
-  `}
+  ${tw`pr-2 text-xs font-normal md:px-2 md:text-sm text-BASIC_GRAY`}
 
   &:hover, &:active, &:focus {
     color: #8580e1;
+  }
 
+  &.clicked {
+    color: #8580e1;
   }
 `;
 
 //오른쪽 공지사항과 랭킹 
 export const RightSideWrapper = tw.div`
-  p-2
-  flex
-  flex-col
+  hidden
+  md:p-2
+  md:flex
+  md:w-full
+  md:flex-col
 `;
 
 export const SideBoxWrapper = styled.div<{type?: string}>`
-  ${tw`border
-  border-BASIC_BORDER
-  rounded-lg
-  pb-3
-  mt-10
-  w-60
-  h-fit
-  relative`}
+  ${tw`relative pb-3 mt-10 border rounded-lg border-BASIC_BORDER w-60 h-fit`}
 
   padding-top: ${(props) => (props.type === "ranking") ? "0px" : "2rem"};
 `;
@@ -142,22 +135,14 @@ export const SideBoxPin = tw.div`
   p-2
   flex
   rounded-full
-  bg-BASIC_PURPLE
+bg-BASIC_PURPLE
   absolute
   top-[-25px]
   right-[100px]
 `;
 
 const NoticeBox = styled.div<{exception?: string}>`
-  ${tw`
-    px-5
-    py-2
-    font-light
-    text-xs
-    mb-2
-    cursor-pointer
-    mx-2
-  `}
+  ${tw`px-5 py-2 mx-2 mb-2 text-xs font-light cursor-pointer`}
 
   background-color: ${(props) => (props.exception === 'exception')? '#EEEEEE' : '#FFD9E0'};
   &:hover{
@@ -187,9 +172,8 @@ interface Rankingprops {
 
 export const RankingTitle = ( {title, date}: Rankingprops ) => {
   return(
-    <div className="flex flex-row justify-between items-end bg-BASIC_LINE text-base 
-    font-light overflow-hidden py-3 px-2 border border-b-BASIC_BORDER ">
-      <div className="font-semibold text-sm">{title}</div>
+    <div className="flex flex-row items-end justify-between px-2 py-3 overflow-hidden text-base font-light border bg-BASIC_LINE border-b-BASIC_BORDER ">
+      <div className="text-sm font-semibold">{title}</div>
       <div className="text-xs text-BASIC_TEXT">{date} 기준</div>
     </div>
   )
@@ -199,18 +183,32 @@ interface RankingItem {
   num: number;
   title: string;
   likes: number;
+  communityId: number;
 }
 
 
-export const RankingCommuItem = ({num, title, likes}: RankingItem) => {
+export const TextTruncate = (props: { text: string; maxLength: number }) => {
+  const { text, maxLength } = props;
+
+  if (text.length <= maxLength) {
+    return <p>{text}</p>;
+  } else {
+    const truncatedText = text.slice(0, maxLength) + '...';
+    return <p>{truncatedText}</p>;
+  }
+};
+
+export const RankingCommuItem = ({num, title, likes, communityId}: RankingItem) => {
   const style = {color: "#8580E1", fontSize: "1.5em"}
+
   return(
-    <div className="px-3 py-3 flex flex-row text-xs font-light text-BASIC_TEXT cursor-pointer
-    hover:text-BASIC_BLACK">
+    <Link to={`/boards/${communityId}`}>
+    <div className="flex flex-row px-3 py-3 text-xs font-light cursor-pointer text-BASIC_TEXT hover:text-BASIC_BLACK">
       <div className="pr-1 font-semibold">{num}</div>
-      <div className="truncate ... px-1 ml-1">{title}</div>
+      <div className="truncate ... px-1 ml-1 flex-1"><TextTruncate text={title} maxLength={20}/></div>
       <LiaHeartSolid style={style}/>
       <div className="pl-1 text-BASIC_PURPLE">{likes}</div>
     </div>
+    </Link>
   )
 }

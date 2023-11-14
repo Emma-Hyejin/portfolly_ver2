@@ -7,7 +7,6 @@ import { categories } from '@/assets/data/category';
 import { initializeTag, setCategory, portfolio } from '@/store/portfolioSlice';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 
-import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
 import { DropDownItemContainer } from './CategoryDropdown.styled';
 import DropDownItem from '@/commons/atoms/dropdown/DropDownItem';
 import DropDownBox from '@/commons/atoms/dropdown/DropDownBox';
@@ -29,7 +28,7 @@ export default function ContegroyDropDown() {
   }
 
   return (
-    <FlexColumnWrapper>
+    <>
       <DropDownBox dropdownItem={matchCategory(savedPortfolio.category)} isOpen={isOpen} onClick={onClick} />
       {isOpen &&
         <DropDownItemContainer>
@@ -40,6 +39,6 @@ export default function ContegroyDropDown() {
           }
         </DropDownItemContainer>
       }
-    </FlexColumnWrapper>
+    </>
   )
 }
