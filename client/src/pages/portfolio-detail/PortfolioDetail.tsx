@@ -1,10 +1,10 @@
 /* 2023-07-07 포트폴리오 상세보기 페이지 - 김다함 */
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import useChangeHtmlContent from '@/hooks/useChangeHtmlContent';
 import { call } from '@/utils';
-import { Portfolio, Member, Tag } from '@/types';
+// import { Member } from '@/types';
 import Image from '@/commons/atoms/image/Image';
 
 import {
@@ -34,23 +34,23 @@ export default function PortfolioDetail() {
   // console.log(dummy[0].data);
   const temp = dummy[0].data;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [portfolio, setPortfolio] = useState<any>(temp);
-  const [createdAt, setCreatedAt] = useState<string>('');
-  const [member, setMember] = useState<Member>();
+  const [portfolio, ] = useState<any>(temp);
+  // const [createdAt, setCreatedAt] = useState<string>('');
+  // const [member, setMember] = useState<Member>();
 
   const [sanitize, setElementInlineStyle] = useChangeHtmlContent();
   const { portfolio_id: portfolioId } = useParams();
   const navigate = useNavigate();
 
   const deletePortfolio = () => call(`/portfolios/${portfolioId}`, 'DELETE');
-  const getPortfolio = () => call(`/portfolios/${portfolioId}`, 'GET');
+  // const getPortfolio = () => call(`/portfolios/${portfolioId}`, 'GET');
 
-  const onEditButtonClick = () => window.location.href = `/portfolio/edit?portfolioId=${portfolioId}`;
+  // const onEditButtonClick = () => window.location.href = `/portfolio/edit?portfolioId=${portfolioId}`;
   const openDeleteModal = () => setIsModalOpen(!isModalOpen);
-  const deletePortfolioHandler = () => {
-    // deletePortfolio();
-    navigate('/main');
-  };
+  // const deletePortfolioHandler = () => {
+  //   // deletePortfolio();
+  //   navigate('/main');
+  // };
   // useEffect(() => {
   //   getPortfolio().then((res) => {
   //     console.log(res.data);
