@@ -2,7 +2,7 @@ import { LiaHeartSolid } from "react-icons/lia";
 import { CommunityItemWrapper, ItemContent, ItemInfoDate, ItemInfoWrapper, ItemLikeButton, ItemTextWrapper, ItemUserName, ItemUserWrapper, TagSection } from "./CommunityItem.styled";
 
 
-import Skeleton from 'react-loading-skeleton'
+// import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function SkeletonCommunityItem() {
@@ -12,7 +12,7 @@ export default function SkeletonCommunityItem() {
     return (
         <CommunityItemWrapper>
           <ItemUserWrapper>
-            <img ><Skeleton circle={true}/></img>
+            {/* <img ><Skeleton circle={true}/></img> */}
             <ItemUserName></ItemUserName>
           </ItemUserWrapper>
           <ItemTextWrapper>
